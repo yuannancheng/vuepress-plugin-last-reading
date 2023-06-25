@@ -1,143 +1,81 @@
-## Introduction
+## Introduce
 
-The plugIn records the current location information when the page is closed. It is used to show a popup window to that location during the next visit.
+This plug-in records the current browsing location information when the page is closed. Used to display a popup window to that location on the next visit.
 
-same as [@vuepress/plugin-pwa](https://github.com/vuejs/vuepress/tree/master/packages/%40vuepress/plugin-pwa).
+This plugin is refactored using [VuePress 2](https://v2.vuepress.vuejs.org) API based on [@tolking/vuepress-plugin-last-reading](https://github.com/tolking/vuepress-plugin-last-reading)
 
----
+Because `VuePress 2` is still in `beta` when this plugin is developed, major changes are likely to occur in the `Minor` version. Please be sure to read the [change log](https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md) of VuePress carefully when using it. This version of the plugin is based on [VuePress v2.0.0-beta.63](https://github.com/vuepress/vuepress-next/releases/tag/v2.0.0-beta.63).
 
-## Installation
+## Install
 
 ``` sh
-yarn add vuepress-plugin-last-reading
-# or
-npm i vuepress-plugin-last-reading
+npm i @yuannancheng/vuepress-plugin-last-reading
 ```
 
-## Usage
+## Use
 
 ``` js
-module.exports = {
+import { lastReadingPlugin } from '@yuannancheng/vuepress-plugin-last-reading'
+
+export default {
   plugins: [
-    'last-reading'
-  ]
+    lastReadingPlugin({
+      // options
+    }),
+  ],
 }
 ```
 
 ## Options
 
 ### popupConfig
-- Type: `Object`
-- Required: `false`
 
-The default content displayed in the popup component.
+- type: `PopupConfig | I18n`
+- required: `false`
 
-``` js
-module.exports = {
-  plugins: [
-    ['last-reading', {
-      popupConfig: {
-        message: 'Go back',
-        buttonText: 'ok'
-      },
-    }]
-  ]
-}
-```
-
-Or refer to [i18n](../src/i18n.js)
-
-### popupCountdown
-- Type: `Number`
-- Default: `1000`
-- Required: `false`
-
-Configure the time that the popup will display.
-
-### popupComponent
-- Type: `string`
-- Required: `false`
-
-A custom component to replace the default popup component, refer to [Customize the UI of Popup](#customize-the-ui-of-popup).
-
-### popupCustom
-- Type: `Function`
-- Required: `false`
-
-Custom popup related logic.
-
-::: tip
-If this option is configured, define the function in the following way
-:::
+The default prompt text content displayed in the popup component.
 
 ``` js
-module.exports = {
-  plugins: [
-    ['last-reading', {
-      popupCustom: function() {
-        const now = new Date().getTime()
-        if (now - this.lastReading.timestamp > 30 * 24 * 60 *60 * 1000) {
-          this.clean()
-        } else if (this.$route.path === this.lastReading.path) {
-          this.goto()
-        } else {
-          this.show = true
-          setTimeout(this.clean, 10000)
-        }
-      },
-    }]
-  ]
-}
-```
-
-## Customize the UI of Popup
-
-you need to create a global component (e.g. `MyPopup`) at `.vuepress/components`. A simple component created based on the default component is as follows:
-
-``` vue
-<template>
-  <LastReadingPopup v-slot="{ show, goto, message, buttonText }">
-    <div v-if="show" class="my-sw-update-popup">
-      {{ message }}<br>
-      <button @click="goto">{{ buttonText }}</button>
-    </div>
-  </LastReadingPopup>
-</template>
-
-<script>
-import LastReadingPopup from 'vuepress-plugin-last-reading/src/LastReadingPopup.vue'
+import { lastReadingPlugin } from '@yuannancheng/vuepress-plugin-last-reading'
 
 export default {
-  components: { LastReadingPopup }
-}
-</script>
-
-<style>
-.my-sw-update-popup {
-  text-align: right;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #fff;
-  font-size: 20px;
-  padding: 10px;
-  border: 5px solid #3eaf7c;
-}
-
-.my-sw-update-popup button {
-  border: 1px solid #fefefe;
-}
-</style>
-```
-
-Then, update your plugin config:
-
-``` js
-module.exports = {
   plugins: [
-    ['last-reading', {
-      popupComponent: 'MyPopup'
-    }]
-  ]
+    lastReadingPlugin({
+      popupConfig: {
+        message: 'last read position',
+        goto: 'go to',
+        close: 'close'
+      },
+    }),
+  ],
 }
 ```
+
+Or refer to I18n type to configure multi-language.
+
+### popupCountdown
+
+- type: `number`
+- default: `10000`
+- required: `false`
+
+Configure the time to display the popup window.
+
+### storageKeyName
+
+- type: `string`
+- default：`'vuepress-plugin-last-reading'`
+- required: `false`
+
+It is used to set the `localStorage` key name to store reading progress data.
+
+### smooth
+
+- type: `boolean`
+- default：`true`
+- required: `false`
+
+Used to set whether to scroll smoothly when positioning to the last reading position.
+
+> Translated by Google Translate.
+

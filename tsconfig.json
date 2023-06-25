@@ -1,0 +1,23 @@
+{
+  "include": ["src/**/*", "src/**/*.vue", "docs/**/*"],
+  "exclude": [],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": ["@vuepress/client/types"],
+    "isolatedModules": true,
+    "composite": true,
+    "baseUrl": ".",
+  }
+}

@@ -1,89 +1,81 @@
-# vuepress-plugin-last-reading
+## Introduce
 
-> A vuepress plugin to record the last reading
+This plug-in records the current browsing location information when the page is closed. Used to display a popup window to that location on the next visit.
 
-[Documentation](https://tolking.github.io/vuepress-plugin-last-reading/)
+This plugin is refactored using [VuePress 2](https://v2.vuepress.vuejs.org) API based on [@tolking/vuepress-plugin-last-reading](https://github.com/tolking/vuepress-plugin-last-reading)
 
-## Installation
+Because `VuePress 2` is still in `beta` when this plugin is developed, major changes are likely to occur in the `Minor` version. Please be sure to read the [change log](https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md) of VuePress carefully when using it. This version of the plugin is based on [VuePress v2.0.0-beta.63](https://github.com/vuepress/vuepress-next/releases/tag/v2.0.0-beta.63).
+
+## Install
 
 ``` sh
-yarn add vuepress-plugin-last-reading
-# or
-npm i vuepress-plugin-last-reading
+npm i @yuannancheng/vuepress-plugin-last-reading
 ```
 
-## Usage
+## Use
 
 ``` js
-module.exports = {
+import { lastReadingPlugin } from '@yuannancheng/vuepress-plugin-last-reading'
+
+export default {
   plugins: [
-    'last-reading'
-  ]
+    lastReadingPlugin({
+      // options
+    }),
+  ],
 }
 ```
 
 ## Options
 
 ### popupConfig
-- Type: `Object`
-- Required: `false`
 
-The default content displayed in the popup component.
+- type: `PopupConfig | I18n`
+- required: `false`
+
+The default prompt text content displayed in the popup component.
 
 ``` js
-module.exports = {
+import { lastReadingPlugin } from '@yuannancheng/vuepress-plugin-last-reading'
+
+export default {
   plugins: [
-    ['last-reading', {
+    lastReadingPlugin({
       popupConfig: {
-        message: 'Go back',
-        buttonText: 'ok'
+        message: 'last read position',
+        goto: 'go to',
+        close: 'close'
       },
-    }]
-  ]
+    }),
+  ],
 }
 ```
 
-Or refer to [i18n](./src/i18n.js)
+Or refer to I18n type to configure multi-language.
 
 ### popupCountdown
-- Type: `Number`
-- Default: `10000`
-- Required: `false`
 
-Configure the time that the popup will display.
+- type: `number`
+- default: `10000`
+- required: `false`
 
-### popupComponent
-- Type: `string`
-- Required: `false`
+Configure the time to display the popup window.
 
-A custom component to replace the default popup component, refer to [Customize the UI of Popup](https://tolking.github.io/vuepress-plugin-last-reading/#customize-the-ui-of-popup).
+### storageKeyName
 
-### popupCustom
-- Type: `Function`
-- Required: `false`
+- type: `string`
+- default：`'vuepress-plugin-last-reading'`
+- required: `false`
 
-Custom popup related logic.
+It is used to set the `localStorage` key name to store reading progress data.
 
-``` js
-module.exports = {
-  plugins: [
-    ['last-reading', {
-      popupCustom: function() {
-        const now = new Date().getTime()
-        if (now - this.lastReading.timestamp > 30 * 24 * 60 *60 * 1000) {
-          this.clean()
-        } else if (this.$route.path === this.lastReading.path) {
-          this.goto()
-        } else {
-          this.show = true
-          setTimeout(this.clean, 10000)
-        }
-      },
-    }]
-  ]
-}
-```
+### smooth
 
-## License
+- type: `boolean`
+- default：`true`
+- required: `false`
 
-[MIT](http://opensource.org/licenses/MIT)
+Used to set whether to scroll smoothly when positioning to the last reading position.
+
+> Translated by Google Translate.
+

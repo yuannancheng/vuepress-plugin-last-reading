@@ -1,21 +1,20 @@
 {
-  "name": "vuepress-plugin-last-reading",
-  "version": "1.0.0",
-  "main": "src/index.js",
-  "type": "commonjs",
-  "description": "A vuepress plugin to record the last reading",
-  "author": "tolking <qw13131wang@gmail.com>",
+  "name": "@yuannancheng/vuepress-plugin-last-reading",
+  "version": "2.0.0",
+  "main": "src/node/index.ts",
+  "type": "module",
+  "description": "一个记录上次阅读进度的 vuepress 插件",
+  "author": "在同一时空相遇 <y17870181601@163.com>",
   "license": "MIT",
-  "repository": "https://github.com/tolking/vuepress-plugin-last-reading",
+  "repository": "https://github.com/yuannancheng/vuepress-plugin-last-reading",
   "bugs": {
-    "url": "https://github.com/tolking/vuepress-plugin-last-reading/issues"
+    "url": "https://github.com/yuannancheng/vuepress-plugin-last-reading/issues"
   },
-  "homepage": "https://github.com/tolking/vuepress-plugin-last-reading",
-  "doc": "https://tolking.github.io/vuepress-plugin-last-reading/",
+  "homepage": "https://github.com/yuannancheng/vuepress-plugin-last-reading",
+  "doc": "https://yuannancheng.github.io/vuepress-plugin-last-reading/",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "serve": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "keywords": [
     "vuepress",
@@ -25,7 +24,7 @@
     "history"
   ],
   "devDependencies": {
-    "vuepress": "^1.6.0",
-    "vuepress-theme-default-prefers-color-scheme": "^1.1.1"
+    "@vuepress/bundler-vite": "^2.0.0-beta.63",
+    "vuepress": "^2.0.0-beta.63"
   }
 }
