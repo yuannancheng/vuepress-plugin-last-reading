@@ -1,15 +1,19 @@
 {
-  "include": ["src/**/*", "src/**/*.vue", "docs/**/*"],
-  "exclude": [],
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
+    "jsx": "preserve",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
+    "declaration": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
     "lib": [
       "ES2020",
       "DOM",

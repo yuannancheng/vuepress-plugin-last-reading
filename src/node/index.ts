@@ -1,5 +1,5 @@
-import { lastReadingPlugin } from './lastReadingPlugin'
+import { lastReadingPlugin } from './lastReadingPlugin.js'
 
-export * from './lastReadingPlugin'
+export * from './lastReadingPlugin.js'
 
 export default lastReadingPlugin

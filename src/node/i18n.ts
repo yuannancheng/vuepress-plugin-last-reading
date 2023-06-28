@@ -1,4 +1,4 @@
-import { PopupConfig } from './lastReadingPlugin'
+import { PopupConfig } from './lastReadingPlugin.js'
 import type { LocaleConfig } from '@vuepress/shared'
 
 export type I18n = LocaleConfig<PopupConfig>

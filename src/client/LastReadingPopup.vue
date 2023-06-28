@@ -192,7 +192,18 @@ onMounted(() => {
   init()
 
   // 页面关闭时存储当前阅读进度
-  window.addEventListener('pagehide', saveThisReading)
+  // Safari不能触发visiblilitychange
+  if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+    document.addEventListener('pagehide', function () {
+      saveThisReading()
+    })
+  } else {
+    document.addEventListener('visibilitychange', function (event) {
+      if (document.visibilityState === 'hidden') {
+        saveThisReading()
+      }
+    })
+  }
 })
 </script>
 
@@ -295,3 +306,4 @@ onMounted(() => {
   transform: translate(0, 50%) scale(0.5);
 }
 </style>
+./lifecycle.es5.format.js

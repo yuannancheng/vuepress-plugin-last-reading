@@ -1,7 +1,6 @@
 {
   "name": "@yuannancheng/vuepress-plugin-last-reading",
-  "version": "2.0.0",
-  "main": "src/node/index.ts",
+  "version": "2.0.1",
   "type": "module",
   "description": "一个记录上次阅读进度的 vuepress 插件",
   "author": "在同一时空相遇 <y17870181601@163.com>",
@@ -12,9 +11,21 @@
   },
   "homepage": "https://github.com/yuannancheng/vuepress-plugin-last-reading",
   "doc": "https://yuannancheng.github.io/vuepress-plugin-last-reading/",
+  "main": "./dist/node/index.js",
+  "types": "./dist/node/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.zh.md",
+    "LICENSE"
+  ],
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "copy": "cpx \"src/**/*.{d.ts,vue}\" dist && cpx \"dist/client/LastReadingPopup.vue.d.ts\" \"src/client\"",
+    "build:dts": "npm run clean && vue-tsc --declaration --emitDeclarationOnly && npm run copy",
+    "build": "npm run build:dts && tsc",
+    "publish": "npm publish --registry https://registry.npmjs.org/ --access public"
   },
   "keywords": [
     "vuepress",
@@ -25,6 +36,7 @@
   ],
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-beta.63",
+    "vue-tsc": "^1.8.2",
     "vuepress": "^2.0.0-beta.63"
   }
 }

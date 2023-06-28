@@ -44,7 +44,7 @@ export const lastReadingPlugin =
       ...plugin,
 
       // 客户端配置文件
-      clientConfigFile: path.resolve(__dirname, '../client/clientConfig.ts'),
+      clientConfigFile: path.resolve(__dirname, '../client/clientConfig.js'),
 
       define: {
         __LAST_READING_PLUGIN_OPTIONS__: pluginOptions
