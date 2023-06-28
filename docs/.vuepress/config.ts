@@ -1,7 +1,7 @@
 import { defineUserConfig } from 'vuepress'
 import { defaultTheme } from '@vuepress/theme-default'
 import { viteBundler } from '@vuepress/bundler-vite'
-import { lastReadingPlugin } from '../../src/node/index'
+import { lastReadingPlugin } from '../../dist/node/index.js'
 
 export default defineUserConfig({
   base: '/vuepress-plugin-last-reading/',
